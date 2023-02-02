@@ -1,0 +1,5 @@
+flask==2.1.2
+tensorflow
+sklearn
+pandas
+matplotlib
