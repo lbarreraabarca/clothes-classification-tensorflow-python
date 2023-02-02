@@ -1,10 +1,10 @@
 from flask import Blueprint
-from com.data.factory.services.Service import Service
+from com.data.factory.services.ProductClassificatorService import ProductClasificatorService
 
 
-controller = Blueprint('ProductClassificator', __name__)
+productClassificator = Blueprint('ProductClassificator', __name__)
 
-@controller.route('/product/classificator', methods=['POST'])
+@productClassificator.route('/product/classificator', methods=['GET'])
 def index():
-    service = Service()
-    return service.invoke()
+    service = ProductClasificatorService()
+    return service.run()

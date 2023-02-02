@@ -2,6 +2,7 @@ from com.data.science.ports.NeuralNetwork import NeuralNetwork
 from com.data.factory.utils.logger import logging
 import tensorflow as tf
 from tensorflow import keras
+import numpy as np
 
 LOG = logging.getLogger(__name__)
 
@@ -46,6 +47,16 @@ class TensorFlowOperator(NeuralNetwork):
         if modelPath is None or modelPath == '':
             raise ValueError('Model path cannot be None or empty.')
         return tf.keras.models.load_model(modelPath)
+
+    def vectorizeImage(self, imagePath: str):
+        if imagePath is None or imagePath == '':
+            raise ValueError('Image path cannot be None or empty.')
+        try:
+            image = tf.keras.utils.load_img(imagePath)
+            inputArray = tf.keras.utils.img_to_array(image) / 255.0
+            return np.array([inputArray])
+        except Exception as e:
+            raise Exception(f'Error when it was vectorizing the image {imagePath}.')
 
     @property
     def trainSet(self):

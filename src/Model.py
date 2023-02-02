@@ -13,3 +13,5 @@ if __name__ == '__main__':
     neuralNetwork.preprocessingData()
     model = neuralNetwork.trainModel(10)
     model.save('keras/model')
+    LOG.info("Loading model")
+    model = neuralNetwork.loadModel('keras/model')
