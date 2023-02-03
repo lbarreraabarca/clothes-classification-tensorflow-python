@@ -8,12 +8,12 @@ from com.data.factory.utils.logger import logging
 LOG = logging.getLogger(__name__)
 
 class ProductClasificatorService():
-    def run(self):
+    def run(self, payload: dict):
         classNames = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
         'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
         LOG.info('Downloading image')
         image = ImageFileOperator()
-        url = 'https://http2.mlstatic.com/D_NQ_NP_2X_660180-MLC48760902612_012022-F.webp'
+        url = payload['url']
         imagePath = f'tmp/{str(uuid.uuid4())}'
         image.download(url, imagePath)
 
@@ -30,8 +30,12 @@ class ProductClasificatorService():
 
         response = {
             "response": {
+                "predictions": str(predictions[0]),
                 "label": str(label),
-                "classNames": str(classNames[label])
+                "classes": str(classNames),
+                "classNames": str(classNames[label]),
+                "url": url
             }
         }
+    
         return (response, 200)

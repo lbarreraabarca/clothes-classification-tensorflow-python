@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     neuralNetwork = TensorFlowOperator()
     neuralNetwork.preprocessingData()
-    model = neuralNetwork.trainModel(15)
+    model = neuralNetwork.trainModel(10)
     neuralNetwork.saveModel(model, 'keras/model')
     LOG.info("Loading model")
     model = neuralNetwork.loadModel('keras/model')

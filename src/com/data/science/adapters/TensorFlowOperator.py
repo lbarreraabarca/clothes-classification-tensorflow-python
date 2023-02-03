@@ -68,17 +68,8 @@ class TensorFlowOperator(NeuralNetwork):
             image = tf.image.rgb_to_grayscale(image)
             inputArray = tf.keras.utils.img_to_array(image) / 255.0
             
-            plt.figure(figsize=(10,10))
-            plt.subplot(5,5,1)
-            plt.xticks([])
-            plt.yticks([])
-            plt.grid(False)
-            plt.imshow(inputArray, cmap=plt.cm.binary)
-            #plt.show()
             inputArray = tf.image.resize(np.array([inputArray]), [28,28])[0,...,0].numpy()
             return (np.expand_dims(inputArray,0))
-            #print(inputArray.shape)
-            #return inputArray
         except Exception as e:
             raise Exception(f'Error when it was vectorizing the image {imagePath}.')
 
