@@ -9,9 +9,11 @@ if __name__ == '__main__':
     classNames = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
         'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-    neuralNetwork: NeuralNetwork = TensorFlowOperator()
+    neuralNetwork = TensorFlowOperator()
     neuralNetwork.preprocessingData()
-    model = neuralNetwork.trainModel(10)
-    model.save('keras/model')
+    model = neuralNetwork.trainModel(15)
+    neuralNetwork.saveModel(model, 'keras/model')
     LOG.info("Loading model")
     model = neuralNetwork.loadModel('keras/model')
+
+    model.evaluate(neuralNetwork.testSet, neuralNetwork.testLabel, verbose=2)

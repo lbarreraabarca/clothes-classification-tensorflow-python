@@ -1,5 +1,6 @@
 flask==2.1.2
 tensorflow
+tensorflow-hub
 sklearn
 pandas
 matplotlib
